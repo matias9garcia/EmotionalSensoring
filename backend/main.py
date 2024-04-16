@@ -22,17 +22,17 @@ def cargar_datos_json(ruta_archivo):
 datos_json = cargar_datos_json(ruta_archivo_json)
 
 # Ruta para obtener todos los productos
-@app.route('/productos', methods=['GET'])
-def obtener_productos():
+@app.route('/experimentos', methods=['GET'])
+def obtener_experimentos():
     return jsonify(datos_json)
 
 # Ruta para obtener un producto por su ID
-@app.route('/producto/<int:producto_id>', methods=['GET'])
-def obtener_producto(producto_id):
-    producto = next((p for p in productos if p['id'] == producto_id), None)
-    if producto:
-        return jsonify(producto)
-    return jsonify({"mensaje": "Producto no encontrado"}), 404
+@app.route('/experimentos/<int:id_sesion>', methods=['GET'])
+def obtener_experimento(id_sesion):
+    experimento = next((p for p in datos_json if p['id_sesion'] == id_sesion), None)
+    if experimento:
+        return jsonify(experimento)
+    return jsonify({"mensaje": "Sesión no encontrada"}), 404
 
 # Ruta para agregar un nuevo producto
 @app.route('/producto', methods=['POST'])
